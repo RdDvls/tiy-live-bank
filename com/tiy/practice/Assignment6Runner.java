@@ -19,7 +19,7 @@ public class Assignment6Runner {
 
     public static void main(String[] args) {
         System.out.println("Running ... with " + args.length + " arguments");
-
+        System.out.println("I tinkered");
         String commandLineBankName = "Default Bank Name"; 
         String commandLineAcctName = "Default Account Name";
         double commandLineInitBalance = 0.0;
