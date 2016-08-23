@@ -2,21 +2,60 @@ package com.tiy.practice;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+//import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-/**
- * Created by dbashizi on 8/15/16.
- */
-public class BankAccount {
+
+public class BankAccount implements Runnable{
     private double balance;
     private String name;
+    private DateTimeFormatter localFormat;
     private LocalDateTime createdDate;
     private LocalDateTime lastTransactionDate;
+    private int type;
+    private long sleepTimeout = 0;
+    private double interestRate =1;
 
-    public BankAccount() {
-        this.createdDate = LocalDateTime.now();
+
+
+    public BankAccount(String name,int type, double balance) {
+        this.name = name;
+        this.type = type;
+        this.balance = balance;
     }
+
+    public void run() {
+       try{ System.out.println("Running bank account thread for: " + name);
+        while (BankAssignment.runInterestThreads){
+            Thread.sleep(sleepTimeout);
+            setBalance(getBalance() * interestRate);
+            System.out.println("NB: ("+name+")" + getBalance());
+            Thread.sleep(sleepTimeout);
+        }
+
+    }catch(Exception exception){
+        exception.printStackTrace();
+       }
+
+
+
+        if(type == 2 ){   //Accrue interest if type 2(Savings) or type 3(Retirement)
+            sleepTimeout = 10000;
+            interestRate=1.05;
+            Thread accountThread = new Thread(this);
+            accountThread.start();
+        }else if(type ==2){
+            sleepTimeout = 5000;
+            interestRate=1.05;
+            Thread accountThread = new Thread(this);
+            accountThread.start();
+
+        }
+
+        }
+
+
 
     public void printInfo() {
         System.out.println("Account name: " + name);
@@ -29,6 +68,18 @@ public class BankAccount {
             System.out.println("Last transaction on: " + lastTransactionDate.format(localFormat));
         }
     }
+
+    /*public void printInfo() {
+        System.out.println("Account name: " + name);
+        System.out.println("Account balance: " + balance);
+        System.out.println("Created on: " + createdDate);
+        if (lastTransactionDate == null) {
+            System.out.println("Last transaction on: N/A");
+        } else {
+            DateTimeFormatter localFormat = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+            System.out.println("Last transaction on: " + lastTransactionDate.format(localFormat));
+        }
+    }*/
 
     public LocalDateTime getCreatedDate() {
         return createdDate;
@@ -73,6 +124,9 @@ public class BankAccount {
     public void setName(String name) {
         this.name = name;
     }
+
+
+
 }
 
 /* setters and getter look slightly different for booleans

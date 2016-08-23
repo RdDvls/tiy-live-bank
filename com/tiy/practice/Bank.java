@@ -2,9 +2,7 @@ package com.tiy.practice;
 
 import java.util.HashMap;
 
-/**
- * Created by dbashizi on 8/16/16.
- */
+
 public class Bank {
     private String name;
     private HashMap<String, BankAccount> bankAccountsByName;

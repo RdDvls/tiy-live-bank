@@ -2,12 +2,12 @@ package com.tiy.practice;
 
 import java.util.Scanner;
 
-/**
- * Created by dbashizi on 8/15/16.
- */
-public class Assignment6Runner {
 
-    public static void addHarcodedBankAccounts(Bank thisCanBeNamedWhatever, String acctName, double initBal) {
+
+public class BankAssignment {
+    public static boolean runInterestThreads = true;
+
+    /*public static void addHarcodedBankAccounts(Bank thisCanBeNamedWhatever, String acctName, double initBal) {
         for (int accountIndex = 0; accountIndex < 5; accountIndex++) {
             BankAccount myAccount = new BankAccount();
             myAccount.setName(acctName + " - " + accountIndex);
@@ -15,23 +15,24 @@ public class Assignment6Runner {
             thisCanBeNamedWhatever.addBankAccount(myAccount);
         }
 
-    }
+    }*/
 
     public static void main(String[] args) {
-        System.out.println("Running ... with " + args.length + " arguments");
-        System.out.println("I tinkered");
-        String commandLineBankName = "Default Bank Name"; 
-        String commandLineAcctName = "Default Account Name";
+        //System.out.println("Running ... with " + args.length + " arguments");
+        //System.out.println("I tinkered");
+        String commandLineBankName = "First Bank of Sampson";
+        //String commandLineAcctName = "Default Account Name";
         double commandLineInitBalance = 0.0;
-        if (args.length == 3) { 
+        if (args.length == 3) {
             commandLineBankName = args[0];
-            commandLineAcctName = args[1];
+            //commandLineAcctName = args[1];
             commandLineInitBalance = Double.valueOf(args[2]);
         }
 
         Bank myBank = new Bank();
-        myBank.setName(commandLineBankName);
-
+        System.out.println("Welcome to the First Bank of Sampson");
+        System.out.println("*************************************");
+        System.out.println(" ");
         System.out.println("How many bank accounts do you have?");
         Scanner inputScanner = new Scanner(System.in);
         int numBankAccounts = Integer.valueOf(inputScanner.nextLine());
@@ -41,31 +42,11 @@ public class Assignment6Runner {
             String accountName = inputScanner.nextLine();
             System.out.println("Initial Balance please: ");
             double initBalance = Double.valueOf(inputScanner.nextLine());
-            BankAccount bankAccount = new BankAccount();
+            BankAccount bankAccount = new BankAccount(accountName, accountIndex, initBalance);
             bankAccount.setName(accountName);
             bankAccount.setBalance(initBalance);
             myBank.addBankAccount(bankAccount);
         }
-
-//        addHarcodedBankAccounts(myBank, commandLineAcctName, commandLineInitBalance);
-//
-/* example of hardcoded accounts created manually (before we created in a loop
-
-        BankAccount myAccount = new BankAccount();
-        myAccount.setName(commandLineAcctName);
-        myAccount.setBalance(commandLineInitBalance);
-
-        myBank.addBankAccount(myAccount);
-
-        BankAccount secondAcct = new BankAccount();
-        secondAcct.setName("Savings");
-        secondAcct.setBalance(100.00);
-
-        myBank.addBankAccount(secondAcct);
-
-        System.out.println("My Account Info: ");
-        myAccount.printInfo();
-*/
 
         System.out.println("My Bank Info: ");
         myBank.printInfo();
@@ -73,7 +54,7 @@ public class Assignment6Runner {
         while (true) {
 
             System.out.println("Enter the name of the account you would like to use: ");
-            System.out.println("(Enter exit to exit ;-)");
+            System.out.println("Enter exit to exit");
             for (String accountKey : myBank.getBankAccountsByName().keySet()) {
                 System.out.println(accountKey);
             }
@@ -147,6 +128,9 @@ public class Assignment6Runner {
         System.out.println("--------------------------------");
         myAccount.printInfo();
 */
+    }
+    public void shutdown(){
+
     }
 
 }
